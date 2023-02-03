@@ -32,9 +32,9 @@ def create_people():
             bindData = (_name, _email, _phone, _address)
             cursor.execute(sqlQuery, bindData)
             conn.commit()
-            respone = jsonify('Employee added successfully!')
-            respone.status_code = 200
-            return respone
+            response = jsonify('Employee added successfully!')
+            response.status_code = 200
+            return response
         else:
             return showMessage()
     except Exception as e:
@@ -67,9 +67,9 @@ def people_details(people_id):
         cursor.execute(
             "SELECT id, name, email, phone, address FROM people WHERE id =%s", people_id)
         peopleRow = cursor.fetchone()
-        respone = jsonify(peopleRow)
-        respone.status_code = 200
-        return respone
+        response = jsonify(peopleRow)
+        response.status_code = 200
+        return response
     except Exception as e:
         print(e)
     finally:
@@ -85,9 +85,9 @@ def people_N(people_n):
         cursor.execute(
             f"SELECT * FROM people LIMIT {people_n}")
         peopleRow = cursor.fetchall()
-        respone = jsonify(peopleRow)
-        respone.status_code = 200
-        return respone
+        response = jsonify(peopleRow)
+        response.status_code = 200
+        return response
     except Exception as e:
         print(e)
     finally:
@@ -110,9 +110,9 @@ def update_people():
             cursor = conn.cursor()
             cursor.execute(sqlQuery, bindData)
             conn.commit()
-            respone = jsonify('Employee updated successfully!')
-            respone.status_code = 200
-            return respone
+            response = jsonify('Employee updated successfully!')
+            response.status_code = 200
+            return response
         else:
             return showMessage()
     except Exception as e:
@@ -129,9 +129,9 @@ def delete_people(id):
 		cursor = conn.cursor()
 		cursor.execute("DELETE FROM people WHERE id =%s", (id,))
 		conn.commit()
-		respone = jsonify('Employee deleted successfully!')
-		respone.status_code = 200
-		return respone
+		response = jsonify('Employee deleted successfully!')
+		response.status_code = 200
+		return response
 	except Exception as e:
 		print(e)
 	finally:
@@ -145,9 +145,9 @@ def showMessage(error=None):
         'status': 404,
         'message': 'Record not found: ' + request.url,
     }
-    respone = jsonify(message)
-    respone.status_code = 404
-    return respone
+    response = jsonify(message)
+    response.status_code = 404
+    return response
 
 
 if __name__ == "__main__":
