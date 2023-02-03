@@ -1,4 +1,4 @@
-FROM python:bullseye
+FROM python:slim
 
 RUN python -m pip install --upgrade pip
 RUN pip install Flask
