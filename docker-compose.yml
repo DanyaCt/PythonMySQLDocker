@@ -1,0 +1,18 @@
+version: "2"
+services:
+  pythonapp:
+    build: ./python/
+    command: sh -c "python3 ./main.py"
+    depends_on:
+      - mysql
+    ports:
+      - "5000:5000"
+    
+  mysql:
+    build: ./mysql/
+    restart: always
+    environment :
+      MYSQL_DATABASE: "emp"
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+    ports:
+      - "3309:3306"
